@@ -6,13 +6,12 @@
 
 .todo-area {
   position: relative;
-  margin: 0 auto;
+  margin: 200px auto;
   padding: 32px;
   width: 384px;
   min-height: 260px;
   border-radius: 20px;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
-  transform: translateY(50%);
 }
 .todo-area .title {
   width: 59px;
@@ -29,6 +28,12 @@
 .todo-area .list-area.empty .todo-list {
   display: none;
 }
+.todo-area .list-area.empty .empty-text {
+  display: block;
+}
+.todo-area .list-area .empty-text {
+  display: none;
+}
 .todo-area .list-area .empty-text {
   position: absolute;
   top: 50%;
@@ -36,6 +41,32 @@
   font-size: 18px;
   color: var(--color-empty-text-gray);
   transform: translate(-50%, -50%);
+}
+.todo-area .list-area .todo-list {
+  margin: 40px 0 98px;
+}
+.todo-area .list-area .todo-list .item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  height: 40px;
+}
+.todo-area .list-area .todo-list .item .radio-icon,
+.todo-area .list-area .todo-list .item .menu-icon {
+  cursor: pointer;
+}
+.todo-area .list-area .todo-list .item input {
+  padding-left: 8px;
+  height: 20px;
+  width: 100%;
+  border: none;
+}
+.todo-area .list-area .todo-list .item:last-child {
+  margin-bottom: 0;
+}
+.todo-area .list-area .todo-list .item:hover input {
+  border-bottom: 1px solid gray;
 }
 .todo-area .add-btn {
   position: absolute;
