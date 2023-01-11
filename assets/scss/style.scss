@@ -68,7 +68,7 @@
                     padding-left: 8px;
                     height: 20px;
                     width: 100%;
-                    // outline: none;
+                    outline: none;
                     border: none;
                 }
 
@@ -76,7 +76,8 @@
                     margin-bottom: 0;
                 }
 
-                &:hover input {
+                &:hover input,
+                input:focus {
                     border-bottom: 1px solid gray;
                 }
             }

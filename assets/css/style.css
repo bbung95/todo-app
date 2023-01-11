@@ -60,12 +60,14 @@
   padding-left: 8px;
   height: 20px;
   width: 100%;
+  outline: none;
   border: none;
 }
 .todo-area .list-area .todo-list .item:last-child {
   margin-bottom: 0;
 }
-.todo-area .list-area .todo-list .item:hover input {
+.todo-area .list-area .todo-list .item:hover input,
+.todo-area .list-area .todo-list .item input:focus {
   border-bottom: 1px solid gray;
 }
 .todo-area .add-btn {

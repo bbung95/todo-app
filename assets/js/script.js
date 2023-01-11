@@ -4,12 +4,18 @@ const addBtn = document.querySelector(".add-btn");
 
 let itemList = [];
 
-const listRefresh = () => {
+const localStorageListUpdate = () => {
     let json = JSON.stringify(itemList);
     localStorage.setItem("todo-list", json);
+};
+
+// todo-list re-rendering
+const listRefresh = () => {
+    localStorageListUpdate();
     listEmptyCheck();
 };
 
+// todo-list check
 const listEmptyCheck = () => {
     if (itemList.length > 0) {
         listArea.classList = "list-area";
@@ -21,6 +27,7 @@ const listEmptyCheck = () => {
     }
 };
 
+// todo 추가
 const addTodoItem = () => {
     const id = Math.floor(Math.random() * 1000000);
 
@@ -34,22 +41,26 @@ const addTodoItem = () => {
     listRefresh();
 };
 
+// todo element create
 const appendTodoEl = (obj) => {
     const radioImg = obj.active ? "/assets/icon/radio-fill.svg" : "/assets/icon/radio.svg";
 
     const li = document.createElement("li");
     li.classList = "item";
     li.dataset.id = obj.id;
-    li.innerHTML = `<img class="radio-icon" data-active="${obj.active}" src="${radioImg}" onclick="onClickRadio(event);"/>
+    li.role = "listitem";
+    li.innerHTML = `<a href="#" onclick="onClickRadio(event)"><img class="radio-icon" data-active="${obj.active}" src="${radioImg}" /></a>
                     <input value="${obj.todo}" onkeyup="delay(function(){ onChangeTodoText(event) }, 100 );"/>
-                    <img class="menu-icon" src="/assets/icon/menu.svg" onclick="onClickTodoRemove(event)" />`;
+                    <a href="#" onclick="onClickTodoRemove(event)"><img class="menu-icon" src="/assets/icon/menu.svg" /></a>`;
     listBox.appendChild(li);
 };
 
+// todo radio check
 const onClickRadio = (e) => {
     const el = e.target;
-    const elId = el.parentNode.dataset.id;
+    const elId = el.parentNode.parentNode.dataset.id;
     const active = el.dataset.active == "true" ? false : true;
+    el.dataset.active = active;
 
     itemList.forEach((item) => {
         if (item.id == elId) {
@@ -57,9 +68,11 @@ const onClickRadio = (e) => {
         }
     });
 
-    listRefresh();
+    el.src = active ? "/assets/icon/radio-fill.svg" : "/assets/icon/radio.svg";
+    localStorageListUpdate();
 };
 
+// todo-text keyup-event
 const onChangeTodoText = (e) => {
     const el = e.target;
     const elId = el.parentNode.dataset.id;
@@ -69,9 +82,7 @@ const onChangeTodoText = (e) => {
             item.todo = el.value;
         }
     });
-
-    let json = JSON.stringify(itemList);
-    localStorage.setItem("todo-list", json);
+    localStorageListUpdate();
 };
 
 // 키 이벤트 딜레이
@@ -83,8 +94,9 @@ var delay = (function () {
     };
 })();
 
+// todo remove
 const onClickTodoRemove = (e) => {
-    const el = e.target.parentNode;
+    const el = e.target.parentNode.parentNode;
     itemList = itemList.filter((item) => item.id != el.dataset.id);
     listRefresh();
 };
