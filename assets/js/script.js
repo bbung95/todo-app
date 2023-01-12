@@ -49,9 +49,9 @@ const appendTodoEl = (obj) => {
     li.classList = "item";
     li.dataset.id = obj.id;
     li.role = "listitem";
-    li.innerHTML = `<a href="#" onclick="onClickRadio(event)"><img class="radio-icon" data-active="${obj.active}" src="${radioImg}" /></a>
+    li.innerHTML = `<a href="javascript:;" onclick="onClickRadio(event)"><img class="radio-icon" data-active="${obj.active}" src="${radioImg}" /></a>
                     <input value="${obj.todo}" onkeyup="delay(function(){ onChangeTodoText(event) }, 100 );"/>
-                    <a href="#" onclick="onClickTodoRemove(event)"><img class="menu-icon" src="/assets/icon/menu.svg" /></a>`;
+                    <a href="javascript:;" onclick="onClickTodoRemove(event)"><img class="menu-icon" src="/assets/icon/menu.svg" /></a>`;
     listBox.appendChild(li);
 };
 
